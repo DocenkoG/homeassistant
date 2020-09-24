@@ -1,0 +1,19 @@
+- id: Сжатие базы
+  alias: 00_purge_everyday
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '02:15:00'
+  action:
+    - service: recorder.purge
+      data:
+          keep_days: 7
+          repack: true
+
+
+- alias: "System: Daily snapshot at 03:00"
+  trigger:
+    platform: time
+    at: '03:00:00'
+  action:
+    - service: script.hassio_google_backup
